@@ -20,14 +20,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 import os
 from datetime import timedelta
 
-import firebase_admin
-from firebase_admin import credentials
 
-FIREBASE_CRED_PATH = os.path.join(BASE_DIR, "firebase/firebase.json")
 
-if not firebase_admin._apps:
-    cred = credentials.Certificate(FIREBASE_CRED_PATH)
-    firebase_admin.initialize_app(cred)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-go)!02&=r@!)kbwy97j5ejd4*gc$x&=(l59z5_s2eh(s2^r2kg"
 
