@@ -23,7 +23,7 @@ from datetime import timedelta
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("django-insecure-go)!02&=r@!)kbwy97j5ejd4*gc$x&=(l59z5_s2eh(s2^r2kg")
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 config('DEBUG', default=False, cast=bool)
@@ -101,11 +101,11 @@ REST_FRAMEWORK = {
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": config("waqthdb"),
-        "USER": config("waqthuser"),  # or 'postgres' if using default user
-        "PASSWORD": config("yourpassword"),
-        "HOST": config("localhost"),
-        "PORT": config("5432", cast=int),
+        "NAME": config("DB_NAME"),
+        "USER": config("DB_USER"),
+        "PASSWORD": config("DB_PASSWORD"),
+        "HOST": config("DB_HOST"),
+        "PORT": config("DB_PORT", cast=int),
     }
 }
 
