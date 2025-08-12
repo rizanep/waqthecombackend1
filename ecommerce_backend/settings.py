@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-
+from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,10 +23,10 @@ from datetime import timedelta
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-go)!02&=r@!)kbwy97j5ejd4*gc$x&=(l59z5_s2eh(s2^r2kg"
+SECRET_KEY = config("django-insecure-go)!02&=r@!)kbwy97j5ejd4*gc$x&=(l59z5_s2eh(s2^r2kg")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -101,11 +101,11 @@ REST_FRAMEWORK = {
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "waqthdb",
-        "USER": "waqthuser",  # or 'postgres' if using default user
-        "PASSWORD": "yourpassword",
-        "HOST": "localhost",
-        "PORT": "5432",
+        "NAME": config("waqthdb"),
+        "USER": config("waqthuser"),  # or 'postgres' if using default user
+        "PASSWORD": config("yourpassword"),
+        "HOST": config("localhost"),
+        "PORT": config("5432", cast=int),
     }
 }
 
