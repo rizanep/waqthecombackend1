@@ -50,7 +50,7 @@ INSTALLED_APPS = [
 ]
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173", '3.111.227.204', # React's local dev server
+    "http://localhost:5173", "https://3.111.227.204",
 ]
 REST_FRAMEWORK = {"EXCEPTION_HANDLER": "rest_framework.views.exception_handler"}
 MIDDLEWARE = [
