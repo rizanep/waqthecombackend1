@@ -28,7 +28,7 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['3.111.227.204', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['3.111.227.204', 'localhost', '127.0.0.1', "waqthecom.duckdns.org"]
 
 
 
