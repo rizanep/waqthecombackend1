@@ -45,8 +45,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "django_filters",
-    "channels",
-    "products"
+    "channels"
 
 ]
 CORS_ALLOW_ALL_ORIGINS = True

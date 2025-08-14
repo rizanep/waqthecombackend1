@@ -23,7 +23,7 @@ def save_and_notify(user, message):
 
 def notify_order_created_to_admins(order):
     # Find all staff/admin users
-    admin = User.objects.get(is_admin=True)
+    admin = User.objects.filter(is_staff=True)
     save_and_notify(
         admin,
         f"New order {order.id} placed by {order.user.username} for '{order.product.name}'.",
