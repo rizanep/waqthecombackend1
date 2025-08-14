@@ -6,22 +6,22 @@ from django.shortcuts import get_object_or_404
 from django.utils.crypto import get_random_string
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status, viewsets
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
+from rest_framework.decorators import api_view
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.decorators import action
-from .models import Cart, Category, Order, Product, User, Wishlist,Notification
+from .models import Cart, Order, User, Wishlist,Notification
+from ..products.models import Product
 from .notifications import (notify_user_cart_updated,
                             notify_user_order_created,
                             notify_user_order_status_changed,
                             notify_order_created_to_admins)
-from .serializers import (CartSerializer, CategorySerializer,
-                          CustomTokenObtainPairSerializer, OrderSerializer,
-                          ProductSerializer, UserSerializer,
-                          WishlistSerializer,NotificationSerializer)
+from .serializers import (CartSerializer, CustomTokenObtainPairSerializer, OrderSerializer,
+                          UserSerializer,
+                          WishlistSerializer, NotificationSerializer)
 
 reset_tokens = {}  # Temporary store (use DB for production)
 
@@ -180,21 +180,6 @@ class UserRegisterView(APIView):
 
 class CustomLoginView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
-
-
-class ProductViewSet(viewsets.ModelViewSet):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = [
-        "category__name",
-    ]
-    permission_classes = [AllowAny]
-
-
-class CategoryViewSet(viewsets.ModelViewSet):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
 
 
 class CartViewSet(viewsets.ModelViewSet):
