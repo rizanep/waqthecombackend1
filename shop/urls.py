@@ -1,10 +1,10 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
-from .views import (CartViewSet, CustomLoginView,
-                    ForgotPasswordView, OrderViewSet, ResetPasswordView, UserRegisterView, WishlistViewSet,
-                    create_razorpay_order, verify_payment, NotificationViewSet)
-from ..products.views import ProductViewSet, CategoryViewSet
+from .views import (CartViewSet, CategoryViewSet, CustomLoginView,
+                    ForgotPasswordView, OrderViewSet, ProductViewSet,
+                    ResetPasswordView, UserRegisterView, WishlistViewSet,
+                    create_razorpay_order, verify_payment,NotificationViewSet)
 
 router = DefaultRouter()
 router.register(r"products", ProductViewSet)
