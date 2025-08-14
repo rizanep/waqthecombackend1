@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-from .models import Cart, Category, Order, Product, Wishlist,Notification
+from .models import Cart, Order, Wishlist,Notification
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -118,33 +118,6 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
-
-
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = ["id", "name"]
-
-
-class ProductSerializer(serializers.ModelSerializer):
-    category = serializers.SlugRelatedField(
-        slug_field="name",
-        queryset=Category.objects.all()
-    )
-
-    class Meta:
-        model = Product
-        fields = [
-            "id",
-            "name",
-            "description",
-            "price",
-            "stock",
-            "image",
-            "category",
-            "active",
-            "deleted",
-        ]
 
 
 class WishlistSerializer(serializers.ModelSerializer):
