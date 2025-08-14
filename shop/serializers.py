@@ -127,7 +127,10 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    category = serializers.StringRelatedField()
+    category = serializers.SlugRelatedField(
+        slug_field="name",
+        queryset=Category.objects.all()
+    )
 
     class Meta:
         model = Product
