@@ -10,7 +10,7 @@ User = get_user_model()
 def save_and_notify(user, message):
     Notification.objects.create(user=user, message=message)
 
-    # 2. Send in real time
+
     channel_layer = get_channel_layer()
     async_to_sync(channel_layer.group_send)(
         f"notifications_{user.username}",

@@ -12,7 +12,7 @@ class NotificationConsumer(AsyncWebsocketConsumer):
             self.username = self.scope["url_route"]["kwargs"]["username"]
             print(f"Username extracted: {self.username}")
 
-            self.group_name = f"notifications_{self.username}"  # ✅ important fix
+            self.group_name = f"notifications_{self.username}"
 
             await self.channel_layer.group_add(self.group_name, self.channel_name)
             self.send(text_data=json.dumps({"username": self.username}))
@@ -26,7 +26,6 @@ class NotificationConsumer(AsyncWebsocketConsumer):
             await self.close()
 
     async def disconnect(self, close_code):
-        # ✅ FIX: Check if the attribute exists before using it
         if hasattr(self, "group_name"):
             await self.channel_layer.group_discard(self.group_name, self.channel_name)
 
@@ -38,17 +37,14 @@ class NotificationConsumer(AsyncWebsocketConsumer):
             self.group_name,
             {
                 "type": "send_notification",
-                "content": {"message": message},  # nested payload
+                "content": {"message": message},
             },
         )
         print(message)
 
     async def send_notification(self, event):
         try:
-            # Access the message from the nested 'content' dictionary
             message = event["content"]["message"]
             await self.send(text_data=json.dumps({"message": message}))
         except KeyError as e:
-            # Handle cases where the key might be missing
             print(f"KeyError in send_notification: {e}. Event: {event}")
-            # Do not send a message if it's malformed to avoid crashing

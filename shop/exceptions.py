@@ -1,4 +1,3 @@
-# myapp/exceptions.py
 import logging
 
 from rest_framework import status
@@ -9,17 +8,13 @@ logger = logging.getLogger(__name__)
 
 
 def custom_exception_handler(exc, context):
-    # Call DRF's default handler first
     response = exception_handler(exc, context)
 
-    # Log the error (optional but recommended)
     logger.error(f"Exception: {str(exc)} | Context: {context}")
 
-    # If DRF already handled it, just return
     if response is not None:
         return response
 
-    # Handle unhandled exceptions
     return Response(
         {
             "status": "error",
